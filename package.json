@@ -1,0 +1,33 @@
+{
+  "name": "webpack-101",
+  "version": "1.0.0",
+  "description": "A webpack starter kit for React.",
+  "main": "app.js",
+  "scripts": {
+    "dev": "webpack -d --watch",
+    "prod": "webpack -p"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thodorisk/webpack-101.git"
+  },
+  "keywords": [
+    "yarn",
+    "webpack",
+    "sass",
+    "react",
+    "bootstrap",
+    "babel",
+    "es6"
+  ],
+  "author": "Thodoris Karagiannis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thodorisk/webpack-101/issues"
+  },
+  "homepage": "https://github.com/thodorisk/webpack-101#readme",
+  "devDependencies": {
+    "webpack": "^3.10.0",
+    "yarn": "^1.3.2"
+  }
+}
