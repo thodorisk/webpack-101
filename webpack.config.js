@@ -17,6 +17,11 @@ module.exports = {
           			fallback: "style-loader",
           			use: ['css-loader', 'sass-loader']
         		})
+			},
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				use: 'babel-loader'
 			}
 		]
 	},
