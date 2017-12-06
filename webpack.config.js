@@ -3,10 +3,13 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require ('path');
 
 module.exports = {
-	entry: './src/app.js',
+	entry: {
+		app: './src/app.js',
+		about: './src/about.js'
+	},
 	output: {
 		path: path.resolve(__dirname, 'dist'),
-		filename: 'app.bundle.js'
+		filename: '[name].bundle.js'
 	},
 	devtool: "source-map",
 	module:{
@@ -35,10 +38,19 @@ module.exports = {
     	new HtmlWebpackPlugin({
       		title: 'Homepage',
       		hash: true,
+      		excludeChunks: ['about'],
       		template: './src/index.html'
     	}),
+    	new HtmlWebpackPlugin({
+      		title: 'About',
+      		chunks: ['about'],
+      		hash: true,
+      		filename: 'about.html',
+      		template: './src/about.html'
+    	}),
     	new ExtractTextPlugin({
-    		filename: 'app.css'
+    		filename: 'app.css',
+    		allChunks: true
     	})
   	]
 }
