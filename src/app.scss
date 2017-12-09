@@ -1,6 +1,11 @@
-body {
+html, body {
+	height: 100%;
 	background-color: pink;
 	p {
 		color: white;
+	}
+	img {
+		width: 80%;
+		height: 20%;
 	}
 }
