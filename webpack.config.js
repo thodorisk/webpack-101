@@ -1,22 +1,24 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const path = require ('path');
+const path = require('path');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const precss = require('precss');
 const bootstrapEntryPoints = require('./webpack.bootstrap.config');
+const glob = require('glob');
+const PurifyCSSPlugin = require('purifycss-webpack');
 
 //CSS configuration
 const cssProd = ExtractTextPlugin.extract({
     fallback: 'style-loader',
     use: ['css-loader', 'postcss-loader', 'sass-loader']
 });
-var isProd = process.env.NODE_ENV === "production";
-var cssDev = ['style-loader','css-loader', 'postcss-loader', 'sass-loader'];
-var cssConfig = isProd ? cssProd : cssDev;
+const isProd = process.env.NODE_ENV === "production";
+const cssDev = ['style-loader','css-loader', 'postcss-loader', 'sass-loader'];
+const cssConfig = isProd ? cssProd : cssDev;
 
 //Bootstrap configuration
-var bootstrapConfig = isProd ? bootstrapEntryPoints.prod : bootstrapEntryPoints.dev;
+const bootstrapConfig = isProd ? bootstrapEntryPoints.prod : bootstrapEntryPoints.dev;
 
 
 module.exports = {
@@ -38,6 +40,12 @@ module.exports = {
 			},
       {
         test: /bootstrap\/dist\/js\/umd\//, use: 'imports-loader?jQuery=jquery'
+      },
+      {
+        enforce: 'pre',
+        test: /\.jsx?$/,
+        use: 'eslint-loader',
+        exclude: /node_modules/
       },
 			{
 				test: /\.js$/,
@@ -93,10 +101,18 @@ module.exports = {
     	}),
 			new ExtractTextPlugin({
 			    filename: "/css/[name].css",
-			    disable: process.env.NODE_ENV === "development"
+			    disable: process.env.NODE_ENV === "development",
+          allChunks: true
 			}),
 			new webpack.HotModuleReplacementPlugin(),
 			new webpack.NamedModulesPlugin(),
+      new webpack.LoaderOptionsPlugin({
+          postcss: [autoprefixer],
+      }),
+      new PurifyCSSPlugin({
+          paths: glob.sync(path.join(__dirname, 'src/*.html')),
+          purifyOptions: { info: true, minify: true }
+      }),
       new webpack.ProvidePlugin({
           $: 'jquery',
           jQuery: 'jquery',
@@ -117,9 +133,6 @@ module.exports = {
           Tab: 'exports-loader?Tab!bootstrap/js/dist/tab',
           Tooltip: "exports-loader?Tooltip!bootstrap/js/dist/tooltip",
           Util: 'exports-loader?Util!bootstrap/js/dist/util'
-      }),
-      new webpack.LoaderOptionsPlugin({
-          postcss: [autoprefixer],
-      }),
+      })
   	]
 }
