@@ -3,10 +3,35 @@
   <head>
     <meta charset="UTF-8">
     <title>Homepage</title>
-  <link href="app.d0287f1e9f6f610900e1bb658d472b29.css?53680ccf3dd9b2295ef0" rel="stylesheet"></head>
+  <link href="/css/bootstrap.css?7a3268e0161472dcf6ea" rel="stylesheet"><link href="/css/app.css?7a3268e0161472dcf6ea" rel="stylesheet"><link href="/css/fontAwesome.css?7a3268e0161472dcf6ea" rel="stylesheet"></head>
   <body>
   	<div id="root"></div>
-    <p>Hello from Webpack!</p>
+    <p><span class="fa fa-check">Hello from Webpack!</span></p>
     <img src=images/es6-webpack-react-babel4b665a.png />
-  <script type="text/javascript" src="app.bundle.js?53680ccf3dd9b2295ef0"></script></body>
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Launch demo modal
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  <script type="text/javascript" src="bootstrap.bundle.js?7a3268e0161472dcf6ea"></script><script type="text/javascript" src="app.bundle.js?7a3268e0161472dcf6ea"></script><script type="text/javascript" src="fontAwesome.bundle.js?7a3268e0161472dcf6ea"></script></body>
 </html>
